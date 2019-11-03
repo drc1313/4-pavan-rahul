@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from nhsee import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path(r'admin/', admin.site.urls),
+    path(r'projects/',views.projectslisting),
+    path(r'judges/',views.judgeslisting),
+  #  path(r'api/assign/',views.assignjudge)
 ]
