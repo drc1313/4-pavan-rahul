@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block content %}
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>NhseeProject</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+  .heading h2{
+    margin: 99px 0px -220px 702px;
+  }
+
+  .table {
+
+    margin: 9px 0px 0px 0px;
+  }
+  </style>
+
+</head>
+
+<body>
+
+{% include   'projectform.html' %}
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+
+      <th scope="col">Project title</th>
+      <th scope="col">Description</th>
+      <th scope="col">project category</th>
+
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+
+    <tbody>
+    {% if projectval %}
+        {% for projects in projectval %}
+        <tr>
+
+
+            <td>{{ projects.project_title }}</td>
+            <td>{{ projects.description }}</td>
+            <td>{{ projects.project_category }}</td>
+            {% if projectfilled %}
+
+            <td>                 <form  name="assigning" method="post" >
+                                    {% csrf_token %}
+
+
+                                            <input type="hidden" name="project_id" value = 1 />
+
+                                             <input type="submit" name="assignproject"  value="Submit" disabled/>
+                                </form>
+
+                                </td>
+            {% else %}
+                        <td>                 <form  name="assigning" method="post" >
+                                    {% csrf_token %}
+
+
+                                            <input type="hidden" name="project_id" value = 1 />
+
+                                             <input type="submit" name="assignproject"  value="Submit"/>
+                                </form>
+
+                                </td>
+            {% endif %}
+
+
+
+        </tr>
+        {% endfor %}
+
+
+    {% else %}
+      <div class="heading"><h2>No Projects Available<h2></div>
+    {% endif %}
+    </tbody>
+    </table>
+</body>
+</html>
+
+
+{% endblock %}

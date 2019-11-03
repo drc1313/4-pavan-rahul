@@ -10,7 +10,7 @@ import xlrd
 
 def projectslisting(request):
     userl = project.objects.all()
-    #projects=open("/home/arvind/Downloads/test.xlsm","r")
+    #projects=open("/home/pavan/Downloads/test.xlsm","r")
     #data =projects.encode('utf-8').strip()
     #data=projects.read()
     projectlist=[]
