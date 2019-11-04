@@ -20,6 +20,6 @@ from nhsee import views
 urlpatterns = [
     path(r'admin/', admin.site.urls),
     path(r'projects/',views.projectslisting),
-    #path(r'judges/',views.judgeslisting),
+    path(r'judges/',views.judgeslisting),
   #  path(r'api/assign/',views.assignjudge)
 ]
