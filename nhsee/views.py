@@ -69,7 +69,7 @@ def projectslisting(request):
                     judge_list.append({"judge_name":str(judges.fname)+" "+str(judges.lname),"judge_id":judges.judge_id,"project_id":project_id,"judgestatus":True})
                 else:
                     judge_list.append({"judge_name":str(judges.fname)+" "+str(judges.lname),"judge_id":judges.judge_id,"project_id":project_id})
-            return render(request,'assignjudge.html',{"judgesjson":judge_list})
+            return render(request,'assignjudge.html',{"judgesval":judge_list})
     if 'assignjudge' in request.POST:
                 projectid=request.POST.get('project_id')
                 judgeid=request.POST.get('judge_id')
@@ -89,3 +89,61 @@ def projectslisting(request):
 
 
     return render(request,'projectslisting.html',{"projectval":projectlist})
+
+
+def judgeslisting(request):
+    print("in judgelist")
+    judgel = judge.objects.all()
+    #projects=open("/home/arvind/Downloads/test.xlsm","r")
+    #data =projects.encode('utf-8').strip()
+    #data=projects.read()
+    judge_list=[]
+    for judges in judgel:
+        #print(users.project_id)
+        judgestatus=judge_assignment.objects.filter(judge_id=judges)
+        judgelist=[]
+        for judgeids in judgestatus:
+            judgelist.append(judgeids)
+        judgestatus=len(judgelist)
+        print()
+        if judgestatus > 5:
+                judge_list.append({"judge_name":str(judges.fname)+" "+str(judges.lname),"judge_id":judges.judge_id,"judgestatus":True})
+        else:
+               judge_list.append({"judge_name":str(judges.fname)+" "+str(judges.lname),"judge_id":judges.judge_id})
+
+
+
+
+
+
+    if 'createjudges' in request.POST:
+       print("innnnnnnnnnnnnnnnnnnnnnnnnn")
+            # create a form instance and populate it with data from the request:
+       file_path = request.POST.get('filepath')
+       print(file_path)
+       judgesdata=xlrd.open_workbook(file_path)
+       sheet = judgesdata.sheet_by_index(0)
+       judgenames=sheet.cell_value(0,0)
+
+
+    #print(judgescount)
+
+       for judgenum in range(1,sheet.nrows):
+            individualjudge=sheet.row_values(judgenum)
+            projectinsert = judge(judge_id=individualjudge[0],fname=individualjudge[1],lname=individualjudge[2])
+            projectinsert.save()
+            print(individualjudge)
+
+
+    if 'judgeprojects' in request.POST:
+                print("innnnnnnnnnnnnnn")
+                judgeid=request.POST.getlist('judge_id')
+                print(judgeid)
+                judgeprojects=judge_assignment.objects.filter(judge_id=judgeid)
+
+                for judges in judgeprojects:
+                    judgeid=judges.judge_id
+                    projectid=judges.project_id
+                    judgenames=judge.objects.filter(judge_id=judgeid)
+                    print(judgenames)
+    return render(request,'listjudges.html',{"judgesval":judge_list})
