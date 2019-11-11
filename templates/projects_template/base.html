@@ -1,0 +1,56 @@
+
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>NhseeProject</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  {% load staticfiles %}
+  <link  rel="stylesheet" href="{% static "css/bootstrap.min.css" %}" />
+  <style>
+  .nav-link{
+      margin:0px 0px 0px 0px;
+      color:#fff;
+  }
+
+  .nav-link-active{
+      margin:0px -1169px 0px 1205px;
+      color:#fff;
+      
+  }
+  .nav-item-active{
+    margin:23px 244px 0px -244px;
+  }
+  </style>
+
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+  <!-- Links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="/home">NHSEE</a>
+    </li>
+    <li class="nav-item-active">
+      <a class="nav-link-active" href="/judges">Judges</a>
+    </li>
+    <li class="nav-item-active">
+      <a class="nav-link-active" href="/css">Projects</a>
+    </li>
+    <li class="nav-item-active">
+      <a class="nav-link-active" href="/students">Students</a>
+    </li>
+    <li class="nav-item-active">
+      <a class="nav-link-active" href="/assignment">JudgeAssignment</a>
+    </li>
+
+
+</nav>
+            {% block content %}
+            {% endblock %}
+</body>
+ </html>

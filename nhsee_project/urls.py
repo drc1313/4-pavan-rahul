@@ -15,13 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from nhsee.views import project_views
+#from nhsee.views import project_views
 from nhsee import viewin
 
 urlpatterns = [
     path(r'admin/', admin.site.urls),
-    path(r'projects/',project_views.projectslisting),
-    path(r'judges/',judge_views.judgeslisting),
+    #path(r'projects/',project_views.projectslisting),
+    #path(r'judges/',judge_views.judgeslisting),
     path(r'home/',viewin.home)
   #  path(r'api/assign/',views.assignjudge)
 ]
