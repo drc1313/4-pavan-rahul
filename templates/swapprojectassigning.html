@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% block content %}
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>NhseeProject</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% load staticfiles %}
+  <link  rel="stylesheet" href="{% static "css/bootstrap.min.css" %}" />
+  <style>
+ .heading h2{
+    margin: 99px 0px -220px 893px;
+  }
+
+  .table {
+
+    margin: 11px 0px 10px 328px;
+    border:1px solid #55556636;
+    border-radius:2px;
+  }
+
+  .table-class {
+    margin: 22px 58px 0px -850px;
+  }
+
+  .pagination{
+    margin: -27px 0px 32px 701px;
+  }
+  .first{
+    position:absolute;
+    margin: -23px 0px -170px 147px;
+  }
+  .previous{
+    position:absolute;
+    margin: -23px 7px -40px 204px;
+  }
+  .currentd{
+    position:absolute;
+    margin: 66px 0px -40px 849px;
+  }
+  </style>
+
+</head>
+{% include   'projectform.html' %}
+<div class="pagination">
+    <span class="step-links">
+        {% if projectjson.has_previous %}
+            <div class="first">
+            <a href="?page=1">&laquo; first</a></div>
+            <div class="previous">
+            <a href="?page={{ projectjson.previous_page_number }}">previous</a></div>
+        {% endif %}
+
+        <span class="current">
+            Page {{ projectjson.number }} of {{ projectjson.paginator.num_pages }}.
+        </span>
+
+        {% if projectjson.has_next %}
+        <div class="first">
+            <a href="?page={{ projectjson.next_page_number }}">next</a></div>
+        <div class="previous">
+            <a href="?page={{ projectjson.paginator.num_pages }}">last &raquo;</a><div>
+        {% endif %}
+    </span>
+</div>
+<div class="table-class">
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Project id</th>
+      <th scope="col">Project title</th>
+      <th scope="col">Description</th>
+      <th scope="col">project category</th>
+
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+
+    <tbody>
+    {% if projectjson %}
+        {% for projects in projectjson %}
+        <tr>
+
+            <td>{{ projects.project_id }}</td>
+            <td><strong>{{ projects.project_title }}</strong></td>
+            <td>{{ projects.description }}</td>
+            <td>{{ projects.project_category }}</td>
+
+
+            <td>                 <form  name="assigning" method="post" >
+                                    {% csrf_token %}
+
+
+                                            <input type="hidden" name="project_id" value = {{ projects.projectid }} />
+
+                                             <input type="submit" name="projectjudges"  value="Submit" />
+                                </form>
+
+                                </td>
+
+
+
+
+        </tr>
+        {% endfor %}
+
+
+    {% else %}
+      <div class="heading"><h2>No Projects Available<h2></div>
+    {% endif %}
+    </tbody>
+    </table>
+    </div>
+    {% endblock %}
