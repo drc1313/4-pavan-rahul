@@ -46,4 +46,4 @@ def judge_listing_assignment(request):
     paginator_projects = Paginator(projectlist, 10)
     page = request.GET.get('page')
     contacts = paginator_projects.get_page(page)
-    return render(request,'studentassign_template/projectslisting.html',{"projectjson":contacts})
+    return render(request,'judgeassign_template/projectslisting.html',{"projectjson":contacts})
