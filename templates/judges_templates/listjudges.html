@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+ {% block content %}
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+
+  {% load staticfiles %}
+  <link  rel="stylesheet" href="{% static "css/bootstrap.min.css" %}" />
+  <style>
+   .heading {
+  width: 90%;
+  margin-left: 38%;
+  margin-right: 0%;
+  margin-top: 2%;
+  }
+
+  .table {
+
+    margin: 9% 0% 10% 1%;
+    border:1px solid #55556636;
+
+  }
+
+  .table-class {
+
+    width:90%;
+    margin-left:5%;
+    margin-right:5%;
+    margin-top:4%;
+
+
+  }
+
+  .pagination{
+  margin-left: 1%;
+  margin-right: 0%;
+  margin-top: 0%;
+  }
+  .first{
+    position:absolute;
+    margin: -23px 0px -170px 147px;
+  }
+  .previous{
+    position:absolute;
+    margin: -23px 7px -40px 204px;
+  }
+  .currentd{
+    position:absolute;
+    margin: 26px 0px 0px 90px;
+  }
+
+
+
+.red{
+	background:#f00;
+  padding:11px 0px 0px 0px;
+  margin:23px 53px 0px 0px;
+}
+
+.green{
+  background:#6dcc42;
+  padding:11px 0px 0px 0px;
+  margin:23px 53px 0px 0px;
+}
+input[type=submit]{
+  margin:9px 2px 4px 0px;
+  background-color:#babac2e8;
+  padding: 6px 28px 5px 26px;
+}
+    </style>
+
+</head>
+{% include   'judges_templates/judgesform.html' %}
+<div class="pagination">
+
+    <span class="step-links">
+        {% if judgesjson.has_previous %}
+
+            <div class="previous">
+            <a href="?page={{ judgesjson.previous_page_number }}">previous</a></div>
+        {% endif %}
+        <div class="currentd">
+        <span class="current">
+            Page {{ judgesjson.number }} of {{ judgesjson.paginator.num_pages }}.
+        </span></div>
+
+
+        {% if judgesjson.has_next %}
+        <div class="first">
+            <a href="?page={{ judgesjson.next_page_number }}">next</a></div>
+
+        {% endif %}
+    </span>
+</div>
+
+<div class="table-class">
+  <table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Judge ID</th>
+      <th scope="col">Judges</th>
+      <th scope="col">Status</th>
+      <th scope="col">Selection</th>
+
+    </tr>
+  </thead>
+    {% if judgesjson %}
+    <tbody>
+
+
+
+        {% for judges in judgesjson %}
+        <tr>
+            <td> {{judges.judge_id}}</td>
+            <td> {{judges.judge_name}}</td>
+
+            <form  action='' method="post" >
+            {% csrf_token %}
+            <input type="hidden" name="judge_id" value ={{judges.judge_id}} />
+            {% if judges.judgestatus %}
+              <td> <div class="box green"></div></td>
+              <td><input type='submit' name="judgeprojects"  value="Submit" /></td>
+            {% else %}
+              <td> <div class="box red"></div></td>
+              <td><input type='submit' name="judgeprojects"  value="Submit" /></td>
+            {% endif %}
+            </form>
+        </tr>
+
+        {% endfor %}
+
+
+
+
+
+    </tbody>
+    </table>
+    </div>
+    {% else %}
+
+    <div class="heading"><h2>No judges Available<h2></div>
+    {% endif %}
+
+
+{% endblock content %}

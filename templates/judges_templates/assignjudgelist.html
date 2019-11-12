@@ -1,0 +1,77 @@
+{% block content %}
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>NhseeProject</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+  .table {
+
+    width: 115%;}
+    .box{
+	width:25px;
+	height:10px;
+}
+
+.red{
+	background:#f00;
+}
+
+.green{
+  background:#6dcc42;
+}
+input[type=submit]{
+  margin:6px 0px 7px 100px;
+  background-color:#babac2e8;
+  padding: 6px 28px 5px 26px;
+}
+    </style>
+
+</head>
+
+  <table class="table">
+  <thead class="thead-dark">
+    <tr>
+
+      <th scope="col">projects</th>
+      <th scope="col">Description</th>
+
+
+    </tr>
+  </thead>
+    {% if judgesjson %}
+    <tbody>
+
+    <form  action='' method="post" >
+                                    {% csrf_token %}
+
+
+        {% for judges in judgesjson %}
+        <tr>
+
+            <td> {{judges.project_name}}</td>
+
+
+
+            <input type="hidden" name="judge_id" value ={{judges.judge_id}} />
+            <input type="hidden" name="project_id" value ={{judges.project_id}} />
+            <td>{{ judges.project_description }}</td>
+
+
+        </tr>
+
+
+        {% endfor %}
+        {% endif %}
+
+
+
+        </form>
+
+    </tbody>
+    </table>
+
+
+{% endblock content %}
