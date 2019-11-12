@@ -1,0 +1,81 @@
+{% block content%}
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>NhseeProject</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% load staticfiles %}
+  <link  rel="stylesheet" href="{% static "css/bootstrap.min.css" %}" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <style>
+.dropdown {
+	margin: 5px 0px 7px 1680px;
+
+}
+.dropdown button{
+	background-color:#2c2c2de8
+}
+.btn-primary:hover {
+
+    color: #2c2c2de8;
+	background-color:#a6a6aa91;
+	border-color:#a6a6aa91;
+
+}
+
+
+ .dropdown-menu{
+	margin: 13px 0px 0px -272px;
+	padding: 22px 0px 40px 30px;
+	background-color: #7b7676ba;
+}
+
+.dropdown-menu label{
+	margin: 38px 28px 0px 6px;
+}
+.dropdown-menu input[type=	submit]{
+	margin: 34px 0px 0px 133px;
+}
+.button{
+	background-color: #17181abf;
+}
+  </style>
+
+</head>
+
+
+
+
+
+
+
+
+
+
+<body>
+
+<div class="dropdown">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+      Create Projects </button>
+    <div class="dropdown-menu">
+                        <form  action='' method="post" onaction=return>
+                                    {% csrf_token %}
+
+
+                                            <label Id="topicnamelable"for="projectname">File Path:</label>
+                                            <input id="projecttitle" type="text" name="filepath" maxlength="500" required>
+                                            <input type='submit' name="createprojects"  value="submit" />
+                        </form>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>
+{% endblock %}
