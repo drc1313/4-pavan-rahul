@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from nhsee.views import project_views, judge_views, student_views
+from nhsee.views import project_views, judge_views, student_views, judgeassignment_views
 from nhsee import viewin
 
 urlpatterns = [
@@ -23,6 +23,7 @@ urlpatterns = [
     path(r'projects/',project_views.projectslisting),
     path(r'judges/',judge_views.judgeslisting),
     path(r'students/',student_views.studentlisting),
+    path(r'assignment/',judgeassignment_views.judge_listing_assignment),
     path(r'',viewin.home)
   #  path(r'api/assign/',views.assignjudge)
 ]
