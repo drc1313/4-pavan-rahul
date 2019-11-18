@@ -55,7 +55,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'schoolproject.urls'
+ROOT_URLCONF = 'nhsee.urls'
 
 TEMPLATES = [
     {
@@ -73,7 +73,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'schoolproject.wsgi.application'
+WSGI_APPLICATION = 'nhsee.wsgi.application'
 
 
 # Database
