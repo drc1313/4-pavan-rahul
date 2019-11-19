@@ -1,4 +1,5 @@
-{% block content %}
+{% extends 'base.html' %}
+ {% block content %}
  <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,71 +8,114 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <style>
+ .heading {
+  width: 90%;
+  margin-left: 38%;
+  margin-right: 0%;
+  margin-top: 2%;
+  }
+  
   .table {
-
-    width: 115%;}
-    .box{
-	width:25px;
-	height:10px;
-}
-
+    
+    margin: 9% 0% 10% 1%;
+    border:1px solid #55556636;
+    
+  }
+  
+  .table-class {
+    
+    width:90%%;
+    margin-left:5%;
+    margin-right:5%;
+    margin-top:0%;
+    
+    
+  }
+  
+  .pagination{
+  margin-left: 1%;
+  margin-right: 0%;
+  margin-top: 0%;
+  }
+  .first{
+    position:absolute;
+    margin: 0px 0px 0px 0px;
+  }
+  .previous{
+    position:absolute;
+    margin: 0px 0px 0px 45px;
+  }
+  .currentd{
+    position:absolute;
+    margin: 26px 0px 0px 90px;
+  }
+ 
+ 
+ 
 .red{
 	background:#f00;
+  padding:11px 0px 0px 0px;
+  margin:23px 53px 0px 0px;
 }
 
 .green{
   background:#6dcc42;
+  padding:11px 0px 0px 0px;
+  margin:23px 53px 0px 0px;
 }
 input[type=submit]{
-  margin:6px 0px 7px 100px;
+  margin:9px 2px 4px 0px;
   background-color:#babac2e8;
   padding: 6px 28px 5px 26px;
+}
+.table .thead-light th{
+  text-align="center"
 }
     </style>
 
 </head>
-
+<div class="table-class">
   <table class="table">
-  <thead class="thead-dark">
+  <thead class="thead-light">
     <tr>
-
+      
       <th scope="col">projects</th>
       <th scope="col">Description</th>
-
+      
 
     </tr>
   </thead>
     {% if judgesjson %}
     <tbody>
-
+    
     <form  action='' method="post" >
                                     {% csrf_token %}
 
-
+            
         {% for judges in judgesjson %}
         <tr>
-
+            
             <td> {{judges.project_name}}</td>
 
-
+            
 
             <input type="hidden" name="judge_id" value ={{judges.judge_id}} />
             <input type="hidden" name="project_id" value ={{judges.project_id}} />
             <td>{{ judges.project_description }}</td>
 
-
+            
         </tr>
-
-
+        
+            
         {% endfor %}
         {% endif %}
-
-
-
-        </form>
-
+         
+    
+        
+        </form>   
+    
     </tbody>
     </table>
-
+</div>
 
 {% endblock content %}
