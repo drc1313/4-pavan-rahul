@@ -15,24 +15,25 @@
   margin-right: 0%;
   margin-top: 2%;
   }
-
+  
   .table {
-    width:100%;
+    width:96%;
     margin: 9% 0% 10% 1%;
     border:1px solid #55556636;
-
+    
+    
   }
-
+  
   .table-class {
-
-    width:90%;
+    
+    
     margin-left:5%;
     margin-right:5%;
     margin-top:0%;
-
-
+    
+    
   }
-
+  
   .pagination{
   margin-left: 1%;
   margin-right: 0%;
@@ -50,9 +51,9 @@
     position:absolute;
     margin: 26px 0px 0px 90px;
   }
-
-
-
+ 
+ 
+ 
 .red{
 	background:#f00;
   padding:11px 0px 0px 0px;
@@ -69,7 +70,10 @@ input[type=submit]{
   background-color:#babac2e8;
   padding: 6px 28px 5px 26px;
 }
-
+.table .thead-light th{
+  text-align="center"
+}
+  
   </style>
 
 </head>
@@ -88,7 +92,7 @@ input[type=submit]{
         <span class="current">
             Page {{ projectjson.number }} of {{ projectjson.paginator.num_pages }}.
         </span></div>
-
+        
 
         {% if projectjson.has_next %}
         <div class="first">
@@ -103,51 +107,51 @@ input[type=submit]{
 <table class="table">
   <thead class="thead-light">
     <tr>
-
+      
       <th scope="col">First Name</th>
       <th scope="col">Last Name</th>
       <th scope="col">School</th>
 
     </tr>
   </thead>
-
+   
     <tbody>
     {% if projectjson %}
         {% for projects in projectjson %}
         <tr>
-
+            
 
             <td><strong>{{ projects.first_name }}</strong></td>
             <td>{{ projects.last_name }}</td>
             <td>{{ projects.school }}</td>
-            </td>
-
+            
+           
                         <td>                 <form  name="assigning" method="post" >
                                     {% csrf_token %}
 
 
-                                            <input type="hidden" name="project_id" value = {{ projects.schools }} />
-
-
+                                            <input type="hidden" name="project_id" value = {{ projects.schools }} /> 
+                                            
+                                            
                                 </form>
 
                                 </td>
-
+            
 
 
 
         </tr>
         {% endfor %}
 
-
+   
     {% else %}
-      <div class="heading"><h2>No Projects Available<h2></div>
+      <div class="heading"><h2>No Students Available<h2></div>
     {% endif %}
     </tbody>
     </table>
     </div>
 </body>
 </html>
-
+ 
 
 {% endblock %}
