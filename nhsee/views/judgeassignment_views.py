@@ -1,14 +1,16 @@
 from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse,HttpResponseRedirect
 from django.core.paginator import Paginator
+from ..models.judge_model import judge
 from ..models.project_model import project
 from ..models.judgeassignment_model import judgeassignment
-from ..models.judge_model import judge
 from nhsee import models
 import uuid
 from uuid import UUID
 import os
 import xlrd
+from django.db import DatabaseError, transaction
+import urllib
 
 
 def judge_listing_assignment(request):
@@ -23,10 +25,21 @@ def judge_listing_assignment(request):
 
        for judgenum in range(1,sheet.nrows):
             individualjudge=sheet.row_values(judgenum)
-            proid=get_object_or_404(project, project_id=individualjudge[0])
-            judgeid=get_object_or_404(judge, judge_id=individualjudge[0])
-            projectinsert = judgeassignment(project_id=proid,judge_id=judgeid,goal_score=individualjudge[2],plan_score=individualjudge[3],action_score=individualjudge[4],result_analysis_score=individualjudge[5],communication_score=individualjudge[6],raw_score=individualjudge[7])
-            projectinsert.save()
+
+
+            #try:
+             #       proid=get_object_or_404_safe(project, project_id=individualjudge[0])
+              #      judgeid=get_object_or_404_safe(judge, judge_id=individualjudge[1])
+            #except get_object_or_404.Http404():
+
+             #       pass
+
+            #else:
+
+            insertstat="insert into nhsee_judgeassignment (project_id,judge_id,goal_score,plan_score,action_score,result_analysis_score,communication_score,raw_score) values"+"("+str(individualjudge[0])+","+str(individualjudge[1])+","+str(individualjudge[2])+","+str(individualjudge[3])+","+str(individualjudge[4])+","+str(individualjudge[5])+","+str(individualjudge[6])+","+str(individualjudge[7])+")"
+            judgeassignment.objects.raw(insertstat)
+               # projectinsert = judgeassignment(project_id=proid,judge_id=judgeid,goal_score=individualjudge[2],plan_score=individualjudge[3],action_score=individualjudge[4],result_analysis_score=individualjudge[5],communication_score=individualjudge[6],raw_score=individualjudge[7])
+                #projectinsert.save()
 
 
     userl = judgeassignment.objects.all()

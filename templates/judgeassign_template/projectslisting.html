@@ -9,7 +9,7 @@
   {% load staticfiles %}
   <link  rel="stylesheet" href="{% static "css/bootstrap.min.css" %}" />
   <style>
-   .heading {
+ .heading {
   width: 90%;
   margin-left: 38%;
   margin-right: 0%;
@@ -17,7 +17,7 @@
   }
 
   .table {
-
+    width:96%;
     margin: 9% 0% 10% 1%;
     border:1px solid #55556636;
 
@@ -25,10 +25,10 @@
 
   .table-class {
 
-    width:90%;
+
     margin-left:5%;
     margin-right:5%;
-    margin-top:4%;
+    margin-top:0%;
 
 
   }
@@ -44,7 +44,7 @@
   }
   .previous{
     position:absolute;
-    margin: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 45px;
   }
   .currentd{
     position:absolute;
@@ -69,12 +69,14 @@ input[type=submit]{
   background-color:#babac2e8;
   padding: 6px 28px 5px 26px;
 }
-
+.table .thead-light th{
+  text-align="center"
+}
   </style>
 
 </head>
 {% include   'judgeassign_template/assignform.html' %}
-<body>
+
 
 
 <div class="pagination">
@@ -102,6 +104,7 @@ input[type=submit]{
 <table class="table">
   <thead class="thead-light">
     <tr>
+
       <th scope="col">Project id</th>
       <th scope="col">Judge id</th>
       <th scope="col">Goal score</th>
@@ -110,13 +113,6 @@ input[type=submit]{
       <th scope="col">Result analysis score</th>
       <th scope="col">Communication score</th>
       <th scope="col">Raw score</th>
-
-
-
-
-
-
-      <th scope="col">Actions</th>
     </tr>
   </thead>
 
@@ -125,7 +121,7 @@ input[type=submit]{
         {% for projects in projectjson %}
         <tr>
 
-            <td>{{ projects.project_id}}</td>
+            <td>{{ projects.project_id }}</td>
             <td>{{ projects.judge_id }}</td>
             <td>{{ projects.goal_score }}</td>
             <td>{{ projects.plan_score }}</td>
@@ -133,28 +129,20 @@ input[type=submit]{
             <td>{{ projects.result_analysis_score }}</td>
             <td>{{ projects.communication_score }}</td>
             <td>{{ projects.raw_score }}</td>
-            <td>                 <form  name="assigning" method="post" >
-                                    {% csrf_token %}
 
-
-                                            <input type="hidden" name="project_id" value = {{ projects.project_id}} />
-
-                                             <input type="submit" name="assignproject"  value="Submit" disabled/>
-                                </form>
-
-                                </td>
         </tr>
         {% endfor %}
 
 
+
     {% else %}
       <div class="heading"><h2>No Assignments Available<h2></div>
-    {% endif %}
-    </tbody>
+
+   </tbody>
     </table>
     </div>
-</body>
-</html>
 
+
+  {% endif %}
 
 {% endblock %}
