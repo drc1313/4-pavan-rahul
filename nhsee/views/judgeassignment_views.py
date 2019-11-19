@@ -26,20 +26,41 @@ def judge_listing_assignment(request):
        for judgenum in range(1,sheet.nrows):
             individualjudge=sheet.row_values(judgenum)
 
+            checkjudge=judge.objects.filter(judge_id=individualjudge[1]).values()
+            checkproject=project.objects.filter(project_id=individualjudge[0]).values()
+            judgeli=[]
+            for data in checkjudge:
+                judgein=judgeli.append(data)
 
-            #try:
-             #       proid=get_object_or_404_safe(project, project_id=individualjudge[0])
-              #      judgeid=get_object_or_404_safe(judge, judge_id=individualjudge[1])
+            projectli=[]
+            for prodata in checkproject:
+                    projectin=projectli.append(prodata)
+
+            print(judgeli)
+            print(projectli)
+            if judgeli==[] or projectin==[]:
+                        pass
+            else:
+
+                        judgeid=get_object_or_404(judge, judge_id=individualjudge[1])
+                        print("insert")
+                        proid=get_object_or_404(project, project_id=individualjudge[0])
+                        projectinsert = judgeassignment(project_id=proid,judge_id=judgeid,goal_score=individualjudge[2],plan_score=individualjudge[3],action_score=individualjudge[4],result_analysis_score=individualjudge[5],communication_score=individualjudge[6],raw_score=individualjudge[7])
+                        projectinsert.save()
+            #t
+             #
             #except get_object_or_404.Http404():
 
              #       pass
 
             #else:
 
-            insertstat="insert into nhsee_judgeassignment (project_id,judge_id,goal_score,plan_score,action_score,result_analysis_score,communication_score,raw_score) values"+"("+str(individualjudge[0])+","+str(individualjudge[1])+","+str(individualjudge[2])+","+str(individualjudge[3])+","+str(individualjudge[4])+","+str(individualjudge[5])+","+str(individualjudge[6])+","+str(individualjudge[7])+")"
-            judgeassignment.objects.raw(insertstat)
-               # projectinsert = judgeassignment(project_id=proid,judge_id=judgeid,goal_score=individualjudge[2],plan_score=individualjudge[3],action_score=individualjudge[4],result_analysis_score=individualjudge[5],communication_score=individualjudge[6],raw_score=individualjudge[7])
-                #projectinsert.save()
+           # insertstat='insert into schoolpolls_judgeassignment (project_id_id,judge_id_id,goal_score,plan_score,action_score,result_analysis_score,communication_score,raw_score) values'+'("'+str(individualjudge[0])+'","'+str(individualjudge[1])+'",'+str(individualjudge[2])+','+str(individualjudge[3])+','+str(individualjudge[4])+','+str(individualjudge[5])+','+str(individualjudge[6])+','+str(individualjudge[7])+')'
+            #print(insertstat)
+            #data=judgeassignment.objects.raw(insertstat)
+
+            #print(data)
+
 
 
     userl = judgeassignment.objects.all()
