@@ -25,7 +25,7 @@
 
   .table-class {
 
-    width:90%;
+    width:96%%;
     margin-left:5%;
     margin-right:5%;
     margin-top:0%;
@@ -69,6 +69,10 @@ input[type=submit]{
   background-color:#babac2e8;
   padding: 6px 28px 5px 26px;
 }
+.table .thead-light th{
+  text-align="center"
+}
+
   </style>
 
 </head>
@@ -100,11 +104,14 @@ input[type=submit]{
 <table class="table">
   <thead class="thead-light">
     <tr>
-      <th scope="col">Project id</th>
-      <th scope="col">Project title</th>
-      <th scope="col">Description</th>
-      <th scope="col">project category</th>
+      <th scope="col" align="center">Rank</th>
 
+      <th scope="col" align="center">Title</th>
+      <th scope="col" align="center">Description</th>
+      <th scope="col" align="center">Id</th>
+      <th scope="col" align="center">Category</th>
+      <th scope="col" align="center">Total Score </th>
+      <th scope="col" align="center">Average Score</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
@@ -113,11 +120,14 @@ input[type=submit]{
     {% if projectjson %}
         {% for projects in projectjson %}
         <tr>
+            <td><strong>{{ projects.rank }}</strong></td>
 
-            <td>{{ projects.project_id }}</td>
-            <td><strong>{{ projects.project_title }}</strong></td>
+            <td>{{ projects.project_title }}</td>
             <td>{{ projects.description }}</td>
+            <td>{{ projects.project_id }}</td>
             <td>{{ projects.project_category }}</td>
+            <td>{{ projects.total_score }}</td>
+            <td>{{ projects.average_score }}</td>
 
 
             <td>                 <form  name="assigning" method="post" >
@@ -126,7 +136,7 @@ input[type=submit]{
 
                                             <input type="hidden" name="project_id" value = {{ projects.projectid }} />
 
-                                             <input type="submit" name="projectjudges"  value="Submit" />
+                                             <input type="submit" name="projectjudges"  value="Details" />
                                 </form>
 
                                 </td>
