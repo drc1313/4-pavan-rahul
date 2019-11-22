@@ -15,25 +15,25 @@
   margin-right: 0%;
   margin-top: 2%;
   }
-  
+
   .table {
     width:96%;
     margin: 9% 0% 10% 1%;
     border:1px solid #55556636;
-    
-    
+
+
   }
-  
+
   .table-class {
-    
-    
+
+
     margin-left:5%;
     margin-right:5%;
     margin-top:0%;
-    
-    
+
+
   }
-  
+
   .pagination{
   margin-left: 1%;
   margin-right: 0%;
@@ -51,9 +51,9 @@
     position:absolute;
     margin: 26px 0px 0px 90px;
   }
- 
- 
- 
+
+
+
 .red{
 	background:#f00;
   padding:11px 0px 0px 0px;
@@ -73,7 +73,22 @@ input[type=submit]{
 .table .thead-light th{
   text-align="center"
 }
-  
+
+.delete{
+  margin:0px 0px 0px 1680px ;
+
+}
+.delete input[type=submit]{
+    width: 10em;
+
+    height: 3em;
+    border: 2px solid black;
+    border-radius: 6px;
+    background-color:#2c2c2de8;
+	  border-color:#0062cc;
+    color: #fff;
+}
+
   </style>
 
 </head>
@@ -83,67 +98,81 @@ input[type=submit]{
  <div class="pagination">
 
     <span class="step-links">
-        {% if projectjson.has_previous %}
+        {% if studentjson.has_previous %}
 
             <div class="previous">
-            <a href="?page={{ projectjson.previous_page_number }}">previous</a></div>
+            <a href="?page={{ studentjson.previous_page_number }}">previous</a></div>
         {% endif %}
         <div class="currentd">
         <span class="current">
-            Page {{ projectjson.number }} of {{ projectjson.paginator.num_pages }}.
+            Page {{ studentjson.number }} of {{ studentjson.paginator.num_pages }}.
         </span></div>
-        
 
-        {% if projectjson.has_next %}
+
+        {% if studentjson.has_next %}
         <div class="first">
-            <a href="?page={{ projectjson.next_page_number }}">next</a></div>
+            <a href="?page={{ studentjson.next_page_number }}">next</a></div>
 
         {% endif %}
     </span>
 </div>
+   <div class="delete">
+                        <form  action='' method="get" onaction=return>
+                                    {% csrf_token %}
+
+                                <input type="hidden" name="delete" value="deletestudents" >
+                                <input type='submit' name="deletestudents"  value="Delete" />
+                        </form>
+    </div>
 
 
 <div class="table-class">
 <table class="table">
   <thead class="thead-light">
     <tr>
-      
+
+      <th scope="col">Student id</th>
       <th scope="col">First Name</th>
       <th scope="col">Last Name</th>
       <th scope="col">School</th>
+      <th scope="col">Project id</th>
+
+      
 
     </tr>
   </thead>
-   
-    <tbody>
-    {% if projectjson %}
-        {% for projects in projectjson %}
-        <tr>
-            
 
-            <td><strong>{{ projects.first_name }}</strong></td>
-            <td>{{ projects.last_name }}</td>
-            <td>{{ projects.school }}</td>
-            
-           
+    <tbody>
+    {% if studentjson %}
+        {% for students in studentjson %}
+        <tr>
+
+
+            <td><strong>{{ students.id }}</strong></td>
+            <td>{{ students.first_name }}</td>
+            <td>{{ students.last_name }}</td>
+            <td>{{ students.school }}</td>
+            <td>{{ students.project_id }}</td>
+
+
                         <td>                 <form  name="assigning" method="post" >
                                     {% csrf_token %}
 
 
-                                            <input type="hidden" name="project_id" value = {{ projects.schools }} /> 
-                                            
-                                            
+                                            <input type="hidden" name="project_id" value = {{ students.schools }} />
+
+
                                 </form>
 
                                 </td>
-            
+
 
 
 
         </tr>
         {% endfor %}
 
-   
+
     {% else %}
       <div class="heading"><h2>No Students Available<h2></div>
     {% endif %}
@@ -152,6 +181,6 @@ input[type=submit]{
     </div>
 </body>
 </html>
- 
+
 
 {% endblock %}

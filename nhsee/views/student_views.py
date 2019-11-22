@@ -18,21 +18,26 @@ def studentlisting(request):
        print("innnnnnnn")
        file_path = request.POST.get('filepath')
        print(file_path)
-       judgesdata=xlrd.open_workbook(file_path)
-       sheet = judgesdata.sheet_by_index(0)
-       judgenames=sheet.cell_value(0,0)
+       studentsdata=xlrd.open_workbook(file_path)
+       sheet = studentsdata.sheet_by_index(0)
+       studentnames=sheet.cell_value(0,0)
 
 
-       for judgenum in range(1,sheet.nrows):
-            individualjudge=sheet.row_values(judgenum)
-            print(individualjudge)
-            proid=get_object_or_404(project, project_id=individualjudge[5])
-            student.objects.create(id=individualjudge[1],project_id=proid,firstname=individualjudge[2],lastname=individualjudge[3],school=individualjudge[4])
-    judgel = student.objects.all()
+       for studentnum in range(1,sheet.nrows):
+            individualstudent=sheet.row_values(studentnum)
+            print(individualstudent)
+            proid=get_object_or_404(project, project_id=individualstudent[5])
+            insertstudent=student(id=individualstudent[1],project_id=proid,firstname=individualstudent[2],lastname=individualstudent[3],school=individualstudent[4])
+            insertstudent.save()
+    if 'deletestudents' in request.GET:
+        deleterequest=request.GET.get('delete')
+        if deleterequest=="deletestudents":
+            student.objects.all().delete()
+    studentl = student.objects.all()
     studentslist=[]
-    for judges in judgel:
+    for students in studentl:
 
-        studentslist.append({"first_name":judges.firstname,"last_name":judges.lastname,"project_id":judges.project_id,"school":judges.school})
+        studentslist.append({"id": students.id, "first_name":students.firstname,"last_name":students.lastname,"project_id":students.project_id,"school":students.school})
 
     paginator_projects = Paginator(studentslist, 10)
     page = request.GET.get('page')
@@ -40,4 +45,4 @@ def studentlisting(request):
 
 
 
-    return render(request,'students_template/liststudents.html',{"projectjson":contacts})
+    return render(request,'students_template/liststudents.html',{"studentjson":contacts})
