@@ -26,7 +26,7 @@
 
   .table-class {
 
-
+   overflow: scroll;
     margin-left:5%;
     margin-right:5%;
     margin-top:0%;
@@ -89,12 +89,13 @@ input[type=submit]{
     color: #fff;
 }
 
+
   </style>
 
 </head>
 {% include 'students_template/studentsform.html' %}
 
-<body>
+
  <div class="pagination">
 
     <span class="step-links">
@@ -117,7 +118,7 @@ input[type=submit]{
     </span>
 </div>
    <div class="delete">
-                        <form  action='' method="get" onaction=return>
+                        <form  action='' method="post" onaction=return>
                                     {% csrf_token %}
 
                                 <input type="hidden" name="delete" value="deletestudents" >
@@ -125,19 +126,15 @@ input[type=submit]{
                         </form>
     </div>
 
-
 <div class="table-class">
 <table class="table">
   <thead class="thead-light">
     <tr>
-
-      <th scope="col">Student id</th>
+      <th scope="col">Student Id</th>
+      <th scope="col">Project Id</th>
       <th scope="col">First Name</th>
       <th scope="col">Last Name</th>
       <th scope="col">School</th>
-      <th scope="col">Project id</th>
-
-      
 
     </tr>
   </thead>
@@ -146,40 +143,26 @@ input[type=submit]{
     {% if studentjson %}
         {% for students in studentjson %}
         <tr>
-
-
-            <td><strong>{{ students.id }}</strong></td>
-            <td>{{ students.first_name }}</td>
+            <td>{{ students.student_id }}</td>
+            <td>{{ students.project_id }}</td>
+            <td><strong>{{ students.first_name }}</strong></td>
             <td>{{ students.last_name }}</td>
             <td>{{ students.school }}</td>
-            <td>{{ students.project_id }}</td>
-
-
-                        <td>                 <form  name="assigning" method="post" >
+            <td>                 <form  name="assigning" method="post" >
                                     {% csrf_token %}
-
-
-                                            <input type="hidden" name="project_id" value = {{ students.schools }} />
-
-
+                                            <input type="hidden" name="project_id" value = {{ students.project_id }} />
                                 </form>
-
-                                </td>
-
-
-
-
+            </td>
         </tr>
         {% endfor %}
-
-
     {% else %}
       <div class="heading"><h2>No Students Available<h2></div>
     {% endif %}
     </tbody>
     </table>
     </div>
-</body>
+
+
 </html>
 
 

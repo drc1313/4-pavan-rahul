@@ -8,5 +8,8 @@ class student(Model):
         school=models.CharField(max_length=100)
         project_id=models.ForeignKey(project, on_delete=models.CASCADE)
 
+        class Meta:
+            db_table = "nhsee_student"
+
         def __str__(self):
             return self.id,self.firstname,self.lastname,self.school,self.project_id
