@@ -72,6 +72,22 @@ input[type=submit]{
 .table .thead-light th{
   text-align="center"
 }
+
+.delete{
+  margin:0px 0px 0px 1680px ;
+
+}
+.delete input[type=submit]{
+    width: 10em;
+
+    height: 3em;
+    border: 2px solid black;
+    border-radius: 6px;
+    background-color:#2c2c2de8;
+	  border-color:#0062cc;
+    color: #fff;
+}
+
   </style>
 
 </head>
@@ -99,6 +115,15 @@ input[type=submit]{
         {% endif %}
     </span>
 </div>
+
+   <div class="delete">
+                        <form  action='' method="get" onaction=return>
+                                    {% csrf_token %}
+
+                                <input type="hidden" name="delete" value="deletejudgeassignment" >
+                                <input type='submit' name="deletejudgeassignment"  value="Delete" />
+                        </form>
+    </div>
 
 <div class="table-class">
 <table class="table">

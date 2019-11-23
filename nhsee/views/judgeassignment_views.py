@@ -16,6 +16,16 @@ import urllib
 def judge_listing_assignment(request):
 
 
+    if 'deletejudgeassignment' in request.GET:
+            deleterequest=request.GET.get('delete')
+            if deleterequest=="deletejudgeassignment ":
+                try:
+                    judgeassignment.objects.all().delete()
+
+                except IntegrityError as e:
+                    pass
+
+
 
     if 'createjudgeassignment' in request.POST:
        file_path = request.POST.get('filepath')
@@ -38,7 +48,7 @@ def judge_listing_assignment(request):
 
             print(judgeli)
             print(projectli)
-            if judgeli==[] or projectin==[]:
+            if judgeli==[] or projectli==[]:
                         pass
             else:
 
