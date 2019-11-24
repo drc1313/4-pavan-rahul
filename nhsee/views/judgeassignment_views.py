@@ -36,8 +36,8 @@ def judge_listing_assignment(request):
        for judgenum in range(1,sheet.nrows):
             individualjudge=sheet.row_values(judgenum)
 
-            checkjudge=judge.objects.filter(judge_id=individualjudge[1]).values()
-            checkproject=project.objects.filter(project_id=individualjudge[0]).values()
+            checkjudge=judge.objects.filter(judge_id = individualjudge[0]).values()
+            checkproject=project.objects.filter(project_id = individualjudge[1]).values()
             judgeli=[]
             for data in checkjudge:
                 judgein=judgeli.append(data)
@@ -52,9 +52,9 @@ def judge_listing_assignment(request):
                         pass
             else:
 
-                        judgeid=get_object_or_404(judge, judge_id=individualjudge[1])
+                        judgeid=get_object_or_404(judge, judge_id=individualjudge[0])
                         print("insert")
-                        proid=get_object_or_404(project, project_id=individualjudge[0])
+                        proid=get_object_or_404(project, project_id=individualjudge[1])
                         projectinsert = judgeassignment(project_id=proid,judge_id=judgeid,goal_score=individualjudge[2],plan_score=individualjudge[3],action_score=individualjudge[4],result_analysis_score=individualjudge[5],communication_score=individualjudge[6],raw_score=individualjudge[7])
                         projectinsert.save()
             #t
