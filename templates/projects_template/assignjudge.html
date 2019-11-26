@@ -79,9 +79,9 @@ input[type=submit]{
   <thead class="thead-light">
     <tr>
 
-      <th scope="col">Judges</th>
-      <th scope="col">Status</th>
-      <th scope="col"> </th>
+      <th scope="col">student Id</th>
+      <th scope="col">Student Name</th>
+      <th scope="col"> School </th>
 
     </tr>
   </thead>
@@ -95,19 +95,13 @@ input[type=submit]{
         {% for judges in judgesjson %}
         <tr>
 
-            <td> {{judges.judge_name}}</td>
+            <td> {{judges.studentid}}</td>
+            <td> {{judges.student_name}}</td>
+            <td> {{judges.school}}
 
 
-
-            <input type="hidden" name="judge_id" value ={{judges.judge_id}} />
             <input type="hidden" name="project_id" value ={{judges.project_id}} />
-            {% if judges.judgestatus %}
-              <td> <div class="box red"></div></td>
-              <td><input type='submit' name="assignjudge"  value="Submit" /></td>
-            {% else %}
-              <td> <div class="box green"></div></td>
-              <td><input type='submit' name="assignjudge"  value="Submit" disabled/></td>
-            {% endif %}
+
 
 
         </tr>

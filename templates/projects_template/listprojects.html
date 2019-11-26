@@ -84,6 +84,7 @@ input[type=submit]{
 	  border-color:#0062cc;
     color: #fff;
 }
+
   </style>
 
 </head>
@@ -118,6 +119,12 @@ input[type=submit]{
                                 <input type='submit' name="deleteprojects"  value="Delete" />
                         </form>
     </div>
+  {% if filenotexist %}
+    <div class="alert">
+     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <strong>Danger!</strong> Indicates a dangerous or potentially negative action.
+    </div>
+  {% endif %}
 <div class="table-class">
 <table class="table">
   <thead class="thead-light">
@@ -152,7 +159,7 @@ input[type=submit]{
                                     {% csrf_token %}
 
 
-                                            <input type="hidden" name="project_id" value = {{ projects.projectid }} />
+                                            <input type="hidden" name="project_id" value = {{ projects.project_id }} />
 
                                              <input type="submit" name="projectjudges"  value="Details" />
                                 </form>
@@ -164,6 +171,8 @@ input[type=submit]{
 
         </tr>
         {% endfor %}
+
+
 
 
     {% else %}

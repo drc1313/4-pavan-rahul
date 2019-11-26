@@ -43,6 +43,26 @@
 .button{
 	background-color: #17181abf;
 }
+.alert {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
   </style>
 
 </head>
@@ -67,10 +87,14 @@
 
 
                                             <label Id="topicnamelable"for="projectname">File Path:</label>
-                                            <input id="projecttitle" type="text" name="filepath" maxlength="500" required>
+
+
+                                              <input id="projecttitle" type="text" name="filepath" maxlength="500"  required>
                                             <input type='submit' name="createprojects"  value="submit" />
+
                         </form>
     </div>
+
 </div>
 
 
