@@ -137,6 +137,9 @@ input[type=submit]{
       <th scope="col" align="center">Category</th>
       <th scope="col" align="center">Total Score </th>
       <th scope="col" align="center">Average Score</th>
+      <th scope="col" align="center">Scaled Score</th>
+      <th scope="col" align="center">Z-Score</th>
+
       <th scope="col">Actions</th>
     </tr>
   </thead>
@@ -153,6 +156,8 @@ input[type=submit]{
             <td>{{ projects.project_category }}</td>
             <td>{{ projects.total_score }}</td>
             <td>{{ projects.average_score }}</td>
+            <td>{{ projects.scaled_score }}</td>
+            <td>{{ projects.z_score }}</td>
 
 
             <td>                 <form  name="assigning" method="post" >

@@ -11,7 +11,7 @@ from uuid import UUID
 import os
 import xlrd
 from django.db import IntegrityError
-
+import statistics
 
 def projectslisting(request):
 
@@ -51,34 +51,64 @@ def projectslisting(request):
         projectidlist=judgeassignment.objects.filter(project_id_id=project_id)
         projectcount=[]
         average_scorelist=[]
+        forzscore=[]
         for individualpoject in projectidlist:
             projectcount.append(individualpoject)
             projectid=individualpoject.project_id_id
             judgeid=individualpoject.judge_id_id
             rawscore=individualpoject.raw_score
             average_scorelist.append(rawscore)
+            projectidlist=judgeassignment.objects.filter(judge_id_id=judgeid)
+            for alljudgeprojects in projectidlist:
+                forzscore.append(alljudgeprojects.raw_score)
+
+#average score and total score calculation
+
         project_score=sum(average_scorelist)
         if len(average_scorelist) == 0:
             project_avg_score=0
         else:
             project_avg_score=project_score/len(average_scorelist)
 
+#zscore calculation
 
-
-
+        zscorecalculation=sum(forzscore)
+        if len(forzscore) == 0:
+                allrawjudgescores=0
+                zscore=0
+        else:
+            allrawjudgescores=zscorecalculation/len(forzscore)
+            zscore=(project_avg_score-allrawjudgescores)/statistics.stdev(forzscore)
 
 
         if len(projectcount) <= 5:
-            projectlist.append({"project_id":project_id,"project_title":project_title,"project_category":project_category,"description":description,"total_score":project_score,"average_score":project_avg_score})
+            projectlist.append({"project_id":project_id,"project_title":project_title,"project_category":project_category,"description":description,"total_score":project_score,"average_score":project_avg_score,"z_score":zscore})
 
         else:
-            projectlist.append({"project_id":project_id,"project_title":project_title,"project_category":project_category,"description":description,"projectfilled":True,"total_score":project_score,"average_score":project_avg_score})
+            projectlist.append({"project_id":project_id,"project_title":project_title,"project_category":project_category,"description":description,"projectfilled":True,"total_score":project_score,"average_score":project_avg_score,"z_score":zscore})
+
+#scaled score and rank for score
     n=1
     projectranking=sorted(projectlist, key = lambda i: i['average_score'])
     originalranking = [ele for ele in reversed(projectranking)]
     for assignrank in originalranking:
             assignrank["rank"]=n
             n=n+1
+    minimumscore=originalranking[-1]["average_score"]
+    maximumscore=originalranking[0]["average_score"]
+    rangeval=maximumscore-minimumscore
+    for scaledscore in originalranking:
+        projectavgscore=scaledscore["average_score"]
+        scaled = ((projectavgscore - minimumscore)/rangeval)*25 +25
+        scaledscore["scaled_score"]=scaled
+
+
+#scaled score and rank for zscore
+
+
+
+
+
     paginator_projects = Paginator(originalranking, 10)
     page = request.GET.get('page')
     contacts = paginator_projects.get_page(page)
