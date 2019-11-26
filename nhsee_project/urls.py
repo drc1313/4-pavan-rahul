@@ -24,6 +24,7 @@ urlpatterns = [
     path(r'judges/',judge_views.judgeslisting),
     path(r'students/',student_views.studentlisting),
     path(r'assignment/',judgeassignment_views.judge_listing_assignment),
-    path(r'home/',viewin.home)
+    path(r'home/',viewin.home),
+    path(r'',viewin.home),
   #  path(r'api/assign/',views.assignjudge)
 ]
