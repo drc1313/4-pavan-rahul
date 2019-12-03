@@ -3,7 +3,7 @@
  <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>NhseeProject</title>
+  <title>Bootstrap</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {% load staticfiles %}
@@ -132,13 +132,16 @@ input[type=submit]{
       <th scope="col" align="center">Rank</th>
 
       <th scope="col" align="center">Title</th>
-      <th scope="col" align="center">Description</th>
       <th scope="col" align="center">Id</th>
       <th scope="col" align="center">Category</th>
       <th scope="col" align="center">Total Score </th>
       <th scope="col" align="center">Average Score</th>
       <th scope="col" align="center">Scaled Score</th>
+      <th scope="col" align="center">Scaled Rank</th>
       <th scope="col" align="center">Z-Score</th>
+      <th scope="col" align="center"> Scaled Z-Score</th>
+      <th scope="col" align="center">Iself-Score</th>
+      <th scope="col" align="center">Iself-Rank</th>
 
       <th scope="col">Actions</th>
     </tr>
@@ -151,13 +154,20 @@ input[type=submit]{
             <td><strong>{{ projects.rank }}</strong></td>
 
             <td>{{ projects.project_title }}</td>
-            <td>{{ projects.description }}</td>
             <td>{{ projects.project_id }}</td>
             <td>{{ projects.project_category }}</td>
             <td>{{ projects.total_score }}</td>
             <td>{{ projects.average_score }}</td>
             <td>{{ projects.scaled_score }}</td>
+            <td>{{ projects.scaled_rank}}</td>
             <td>{{ projects.z_score }}</td>
+            <td>{{ projects.scaled_zscore }}</td>
+            <td>{{ projects.isef_score }}</td>
+            <td>{{ projects.iself_rank }}</td>
+
+
+
+
 
 
             <td>                 <form  name="assigning" method="post" >
