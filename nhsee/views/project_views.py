@@ -20,7 +20,7 @@ def projectslisting(request):
 
     if 'projectjudges' in request.POST:
             projectid = request.POST.get('project_id')
-            print(projectid,"sssssssssssssssss")
+            #print(projectid,"sssssssssssssssss")
             judgesq = student.objects.filter(project_id=projectid)
 
             judge_list=[]
@@ -32,7 +32,7 @@ def projectslisting(request):
 
     if 'deleteprojects' in request.GET:
             deleterequest=request.GET.get('delete')
-            print(deleterequest)
+            #print(deleterequest)
             if deleterequest=="deleteprojects":
                 try:
                     project.objects.all().delete()
@@ -73,7 +73,7 @@ def projectslisting(request):
             rawscore_judge["raw_score"]=forzscore
             rawscore_judge["rawscore_individual"]=rawscore
             rawscore_judgelist.append(rawscore_judge)
-            print(rawscore_judgelist)
+            #print(rawscore_judgelist)
         if  len(average_scorelist)==0:
             average_score=0
         else:
@@ -132,7 +132,7 @@ def projectslisting(request):
             assignrawrank["rawscore_rank"]=c
             c=c+1
     for scaledrank in originalrawranking:
-        print(scaledrank)
+        #print(scaledrank)
         judgeprojects=scaledrank["judge_details"]
         avgranklist=[]
 
@@ -141,18 +141,18 @@ def projectslisting(request):
 
 
            scaledrankno=individualjudge["rawscore_individual"]
-           print(individualjudge["raw_score"],"pppppppppppppppppp")
+           #print(individualjudge["raw_score"],"pppppppppppppppppp")
 
            rankfun=individualjudge["raw_score"]
            ranksort=sorted(rankfun, key = lambda x:int(x))
 
            for i in range(0, len(ranksort)):
                 ranksort[i] = int(ranksort[i])
-           print(ranksort)
+           #print(ranksort)
            ranksort.reverse()
-           print(ranksort)
+           #print(ranksort)
            rank=ranksort.index(individualjudge["rawscore_individual"])+1
-           print(rank)
+           #print(rank)
 
 
 

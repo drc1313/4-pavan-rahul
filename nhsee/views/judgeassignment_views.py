@@ -46,14 +46,14 @@ def judge_listing_assignment(request):
             for prodata in checkproject:
                     projectin=projectli.append(prodata)
 
-            print(judgeli)
-            print(projectli)
+            #print(judgeli)
+            #print(projectli)
             if judgeli==[] or projectli==[]:
                         pass
             else:
 
                         judgeid=get_object_or_404(judge, judge_id=individualjudge[0])
-                        print("insert")
+                        #print("insert")
                         proid=get_object_or_404(project, project_id=individualjudge[1])
                         projectinsert = judgeassignment(project_id=proid,judge_id=judgeid,goal_score=individualjudge[2],plan_score=individualjudge[3],action_score=individualjudge[4],result_analysis_score=individualjudge[5],communication_score=individualjudge[6],raw_score=individualjudge[7])
                         projectinsert.save()

@@ -14,7 +14,7 @@ def judgeslisting(request):
 
     if 'createjudges' in request.POST:
        file_path = request.POST.get('filepath')
-       print(file_path,"ggggggggggggggg")
+       #print(file_path,"ggggggggggggggg")
        judgesdata=xlrd.open_workbook(file_path)
        sheet = judgesdata.sheet_by_index(0)
        judgenames=sheet.cell_value(0,0)
@@ -27,7 +27,7 @@ def judgeslisting(request):
 
     if 'judgeprojects' in request.POST:
                 judgeid=request.POST.get('judge_id')
-                print(judgeid,"kkkkkkkkkk-----")
+                #print(judgeid,"kkkkkkkkkk-----")
                 judgeprojects=judgeassignment.objects.filter(judge_id_id=judgeid)
                 judge_list=[]
 
