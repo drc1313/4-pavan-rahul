@@ -94,6 +94,14 @@ input[type=submit]{
         {% endif %}
     </span>
 </div>
+<div class="delete">
+                     <form  action='' method="post" onaction=return>
+                                 {% csrf_token %}
+
+                             <input type="hidden" name="delete" value="deletejudges" >
+                             <input type='submit' name="deletejudges"  value="Delete" />
+                     </form>
+ </div
 
 <div class="table-class">
   <table class="table">

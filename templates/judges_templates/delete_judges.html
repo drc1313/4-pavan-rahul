@@ -1,0 +1,55 @@
+{% block content%}
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>NhseeProject</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% load staticfiles %}
+  <link  rel="stylesheet" href="{% static "css/bootstrap.min.css" %}" />
+  <link  rel="stylesheet" href="{% static "css/jquery.min.js" %}" />
+  <link  rel="stylesheet" href="{% static "css/popprt.min.js" %}" />
+  <link  rel="stylesheet" href="{% static "css/bootstrap.min.js" %}" />
+  <style>
+.dropdown-menu {
+	margin: 5px 0px 7px 100px;
+
+}
+.dropdown button{
+	background-color:#a6a6aa91;
+}
+
+
+  </style>
+
+</head>
+
+
+
+
+
+
+
+
+
+
+<body>
+
+
+    <div class="dropdown-menu">
+                        <form  action='' method="post" onaction=return>
+                                    {% csrf_token %}
+
+                                <input type="hidden" name="delete" value="deletejudges"
+                                <input type='submit' name="deletejudges"  value="Delete" />
+                        </form>
+    </div>
+
+
+
+
+
+</body>
+</html>
+{% endblock %}

@@ -23,6 +23,10 @@ def judgeslisting(request):
             individualjudge=sheet.row_values(judgenum)
             projectinsert = judge(judge_id=individualjudge[0],fname=individualjudge[1],lname=individualjudge[2])
             projectinsert.save()
+    if 'deletejudges' in request.POST:
+      deleterequest=request.GET.get('delete')
+      #if deleterequest=="deletestudents":
+      judge.objects.all().delete()
 
 
     if 'judgeprojects' in request.POST:
