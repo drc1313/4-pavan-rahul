@@ -6,7 +6,7 @@
   <title>NhseeProject</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link  rel="stylesheet" href="{% static "css/bootstrap.min.css" %}" />
   <style>
  .heading {
   width: 90%;
@@ -14,24 +14,24 @@
   margin-right: 0%;
   margin-top: 2%;
   }
-  
+
   .table {
-    
+
     margin: 9% 0% 10% 1%;
     border:1px solid #55556636;
-    
+
   }
-  
+
   .table-class {
-    
+
     width:90%%;
     margin-left:5%;
     margin-right:5%;
     margin-top:0%;
-    
-    
+
+
   }
-  
+
   .pagination{
   margin-left: 1%;
   margin-right: 0%;
@@ -49,9 +49,9 @@
     position:absolute;
     margin: 26px 0px 0px 90px;
   }
- 
- 
- 
+
+
+
 .red{
 	background:#f00;
   padding:11px 0px 0px 0px;
@@ -78,42 +78,42 @@ input[type=submit]{
   <table class="table">
   <thead class="thead-light">
     <tr>
-      
+
       <th scope="col">projects</th>
       <th scope="col">Description</th>
-      
+
 
     </tr>
   </thead>
     {% if judgesjson %}
     <tbody>
-    
+
     <form  action='' method="post" >
                                     {% csrf_token %}
 
-            
+
         {% for judges in judgesjson %}
         <tr>
-            
+
             <td> {{judges.project_name}}</td>
 
-            
+
 
             <input type="hidden" name="judge_id" value ={{judges.judge_id}} />
             <input type="hidden" name="project_id" value ={{judges.project_id}} />
             <td>{{ judges.project_description }}</td>
 
-            
+
         </tr>
-        
-            
+
+
         {% endfor %}
         {% endif %}
-         
-    
-        
-        </form>   
-    
+
+
+
+        </form>
+
     </tbody>
     </table>
 </div>
