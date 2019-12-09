@@ -36,17 +36,10 @@ def studentlisting(request):
     for students in studentl:
         studentslist.append({"first_name":students.firstname,"last_name":students.lastname,"project_id":students.project_id_id,"school":students.school,"student_id":students.id})
         count = count + 1
-    print(count)
 
     #print(studentslist)
     paginator_projects = Paginator(studentslist, 10)
     page = request.GET.get('page')
     contacts = paginator_projects.get_page(page)
     #print(contacts)
-
-    if(count == 96):
-        print('all the students are listed')
-    else:
-        print("some of the data is missing")
-
     return render(request,'students_template/liststudents.html',{"studentjson":contacts})
