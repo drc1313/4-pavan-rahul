@@ -15,24 +15,24 @@
   margin-right: 0%;
   margin-top: 2%;
   }
-  
+
   .table {
     width:100%;
     margin: 9% 0% 10% 1%;
     border:1px solid #55556636;
-    
+
   }
-  
+
   .table-class {
-    
+
     width:90%;
     margin-left:5%;
     margin-right:5%;
     margin-top:0%;
-    
-    
+
+
   }
-  
+
   .pagination{
   margin-left: 1%;
   margin-right: 0%;
@@ -50,9 +50,9 @@
     position:absolute;
     margin: 26px 0px 0px 90px;
   }
- 
- 
- 
+
+
+
 .red{
 	background:#f00;
   padding:11px 0px 0px 0px;
@@ -85,7 +85,7 @@ input[type=submit]{
         <span class="current">
             Page {{ judgesjson.number }} of {{ judgesjson.paginator.num_pages }}.
         </span></div>
-        
+
 
         {% if judgesjson.has_next %}
         <div class="first">
@@ -108,38 +108,38 @@ input[type=submit]{
   </thead>
     {% if judgesjson %}
     <tbody>
-    
-    
-            
+
+
+
         {% for judges in judgesjson %}
         <tr>
             <td> {{judges.judge_id}}</td>
             <td> {{judges.judge_name}}</td>
-            
+
             <form  action='' method="post" >
             {% csrf_token %}
             <input type="hidden" name="judge_id" value ={{judges.judge_id}} />
             {% if judges.judgestatus %}
               <td> <div class="box green"></div></td>
-              <td><input type='submit' name="judgeprojects"  value="Submit" /></td>
+              <td><input type='submit' name="judgeprojects"  value="Details" /></td>
             {% else %}
               <td> <div class="box red"></div></td>
-              <td><input type='submit' name="judgeprojects"  value="Submit" /></td>
+              <td><input type='submit' name="judgeprojects"  value="Details" /></td>
             {% endif %}
-            </form>       
+            </form>
         </tr>
 
         {% endfor %}
-        
 
-        
-   
-    
+
+
+
+
     </tbody>
     </table>
-    </div>  
+    </div>
     {% else %}
-    
+
     <div class="heading"><h2>No judges Available<h2></div>
     {% endif %}
 
