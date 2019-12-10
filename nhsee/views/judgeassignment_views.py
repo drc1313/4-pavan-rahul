@@ -18,7 +18,7 @@ def judge_listing_assignment(request):
 
     if 'deletejudgeassignment' in request.GET:
             deleterequest=request.GET.get('delete')
-            if deleterequest=="deletejudgeassignment ":
+            if deleterequest=="deletejudgeassignment":
                 try:
                     judgeassignment.objects.all().delete()
 
