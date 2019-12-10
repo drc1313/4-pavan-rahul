@@ -24,6 +24,12 @@ def judgeslisting(request):
             projectinsert = judge(judge_id=individualjudge[0],fname=individualjudge[1],lname=individualjudge[2])
             projectinsert.save()
 
+    if 'deletejudges' in request.GET:
+            deleterequest=request.GET.get('delete')
+            if deleterequest=="deletejudges":
+
+                    judge.objects.all().delete()
+
 
     if 'judgeprojects' in request.POST:
                 judgeid=request.POST.get('judge_id')
