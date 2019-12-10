@@ -20,7 +20,7 @@ def projectslisting(request):
 
     if 'projectjudges' in request.POST:
             projectid = request.POST.get('project_id')
-            print(projectid,"sssssssssssssssss")
+
             judgesq = student.objects.filter(project_id=projectid)
 
             judge_list=[]
@@ -32,7 +32,7 @@ def projectslisting(request):
 
     if 'deleteprojects' in request.GET:
             deleterequest=request.GET.get('delete')
-            print(deleterequest)
+
             if deleterequest=="deleteprojects":
                 try:
                     project.objects.all().delete()
@@ -74,7 +74,7 @@ def projectslisting(request):
             rawscore_judge["raw_score"]=forzscore
             rawscore_judge["rawscore_individual"]=rawscore
             rawscore_judgelist.append(rawscore_judge)
-            print(rawscore_judgelist)
+
         totalscore=sum(average_scorelist)
         if  len(average_scorelist)==0:
             average_score=0
@@ -103,9 +103,9 @@ def projectslisting(request):
         else:
             projectlist.append({"project_id":project_id,"project_title":project_title,"judge_details":rawscore_judgelist,"project_category":project_category,"description":description,"projectfilled":True,"total_score":totalscore,"average_score":average_score,"z_score":zscoreresult})
     assignmentcheck=judgeassignment.objects.all()
-    print(assignmentcheck)
+
     if not assignmentcheck:
-        print("innnn")
+        #print("innnn")
 
         for assignrank in projectlist:
                     assignrank["rank"]="Null"
@@ -135,7 +135,7 @@ def projectslisting(request):
         rawscorelist=[]
         for minimumsc in originalranking:
             rawscorelist.append(minimumsc["average_score"])
-        print(rawscorelist)
+
         minimumscore=min(i for i in rawscorelist if i > k)
 
         maximumscore=originalranking[0]["average_score"]
@@ -152,46 +152,47 @@ def projectslisting(request):
                 assignrawrank["rawscore_rank"]=c
                 c=c+1
         for scaledrank in originalrawranking:
-            print(scaledrank)
+
             judgeprojects=scaledrank["judge_details"]
             avgranklist=[]
 
-        for individualjudge in judgeprojects:
-            count_of_judge_projects = len(individualjudge["raw_score"])
+            for individualjudge in judgeprojects:
+                count_of_judge_projects = len(individualjudge["raw_score"])
+                scaledrankno=individualjudge["rawscore_individual"]
 
 
-            scaledrankno=individualjudge["rawscore_individual"]
-            print(individualjudge["raw_score"],"pppppppppppppppppp")
+                rankfun=individualjudge["raw_score"]
+                ranksort=sorted(rankfun, key = lambda x:int(x))
 
-            rankfun=individualjudge["raw_score"]
-            ranksort=sorted(rankfun, key = lambda x:int(x))
+                for i in range(0, len(ranksort)):
+                        ranksort[i] = int(ranksort[i])
 
-            for i in range(0, len(ranksort)):
-                    ranksort[i] = int(ranksort[i])
-            print(ranksort)
-            ranksort.reverse()
-            print(ranksort)
-            rank=ranksort.index(individualjudge["rawscore_individual"])+1
-            print(rank)
+                ranksort.reverse()
+                rank=ranksort.index(individualjudge["rawscore_individual"])+1
 
 
 
-            avg_rank_project=(count_of_judge_projects-rank)/(count_of_judge_projects-1)
-            avgranklist.append(avg_rank_project)
+
+                avg_rank_project=(count_of_judge_projects-rank)/(count_of_judge_projects-1)
+                avgranklist.append(avg_rank_project)
 
 
 
-            if len(avgranklist)==0:
-                scaledrank["average_rank"]=0
-            else:
-                averagera=sum(avgranklist)/len(avgranklist)
-                scaledrank["average_rank"]=averagera
+                if len(avgranklist)==0:
+                    #print("innn 0")
+                    scaledrank["average_rank"]=0
+                else:
+                    #print("innn not null")
+                    averagera=sum(avgranklist)/len(avgranklist)
+                    scaledrank["average_rank"]=averagera
 
         scaledranklist=[]
         for minimumavg in originalrawranking:
-
-            scaledranklist.append(minimumavg["average_rank"])
-
+            #print(minimumavg)
+            try:
+                scaledranklist.append(minimumavg["average_rank"])
+            except KeyError:
+                minimumavg["average_rank"]=0
         minimum_avg_score=min(scaledranklist)
 
         maximum_avg_score = max(scaledranklist)
